@@ -65,7 +65,8 @@ def _detect_url_type(url: str) -> str:
     """Classify the URL for targeted extraction."""
     parsed = urllib.parse.urlparse(url)
     host = (parsed.hostname or "").lower()
-    if host == "twitter.com" or host.endswith(".twitter.com") or host == "x.com" or host.endswith(".x.com"):
+
+    if host in {"twitter.com", "x.com"} or host.endswith(".twitter.com") or host.endswith(".x.com"):
         return "tweet"
     if host == "arxiv.org" or host.endswith(".arxiv.org"):
         return "arxiv"
@@ -73,6 +74,7 @@ def _detect_url_type(url: str) -> str:
         return "github"
     if host == "youtube.com" or host.endswith(".youtube.com") or host == "youtu.be" or host.endswith(".youtu.be"):
         return "youtube"
+
     path = parsed.path.lower()
     if path.endswith(".pdf"):
         return "pdf"
