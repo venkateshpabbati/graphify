@@ -84,13 +84,13 @@ class DigestAuth(Auth):
         nc = f"{self._nonce_count:08x}"
         realm = challenge.get("realm", "")
         nonce = challenge.get("nonce", "")
-        algorithm = challenge.get("algorithm", "MD5").upper()
+        algorithm = challenge.get("algorithm", "SHA-256").upper()
 
         def _hash_hex(value: str) -> str:
             data = value.encode()
             if algorithm in ("SHA-256", "SHA-256-SESS"):
                 return hashlib.sha256(data).hexdigest()
-            return hashlib.md5(data).hexdigest()
+            raise ValueError(f"Unsupported or weak digest algorithm: {algorithm}")
 
         cnonce = _hash_hex(str(time.time()))[:8]
 
