@@ -1634,7 +1634,7 @@ def extract_svelte(path: Path) -> dict:
         # static imports are silently dropped (#713). Regex over each script
         # body recovers them.
         script_re = _re.compile(
-            r"<script\b[^>]*>([\s\S]*?)</script\b[^>]*>", _re.IGNORECASE
+            r"<script\b[^>]*>([\s\S]*?)</script(?:\s+[^>]*)?>", _re.IGNORECASE
         )
         static_import_re = _re.compile(
             r"""import\s+(?:[^'"`;]+?\s+from\s+)?['"]([^'"]+)['"]"""
