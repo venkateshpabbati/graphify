@@ -2534,7 +2534,7 @@ def _emit_rescued_import(
 
 
 _HTML_SCRIPT_TAG_RE = re.compile(
-    r"<script\b((?:\"[^\"]*\"|'[^']*'|[^>\"'])*)>([\s\S]*?)</script\s*>",
+    r"<script\b((?:\"[^\"]*\"|'[^']*'|[^>\"'])*)>([\s\S]*?)</script(?:\s+[^>]*)?>",
     re.IGNORECASE,
 )
 _NON_JS_SCRIPT_TYPE_RE = re.compile(
